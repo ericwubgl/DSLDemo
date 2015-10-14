@@ -5,12 +5,12 @@ class Field {
     def values = []
     def elements
     def output
-
-    Field(List elements) {
-        this.elements = elements
-    }
+    Transformer transformer
 
     void from(Integer... from) {
+        if (elements == null) {
+            return
+        }
         if (from.length == 1) {
             output = elements[from[0]-1]
             return
@@ -23,7 +23,6 @@ class Field {
 
     void transform(def arg) {
         println "Transforming, calling plugin ${arg}"
-        Transformer transformer = new Transformer()
         output = transformer.transform(arg, values)
     }
 

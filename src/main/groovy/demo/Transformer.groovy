@@ -1,32 +1,21 @@
 package demo
 
-class Transformer {
+import org.springframework.context.ApplicationContext
+import org.springframework.context.ApplicationContextAware
 
-    protected methods = [:]
+class Transformer implements ApplicationContextAware {
 
-    def add = { values ->
-        values.sum()
+    def applicationContext
+
+    void setApplicationContext(ApplicationContext context) {
+        this.applicationContext = context
     }
 
-    def concat = { values ->
-        String output = ""
-        values.each { value ->
-            output = "${output} ${value}"
-        }
-        output.trim()
-    }
-
-    Transformer() {
-        methods << ['add': add]
-        methods << ['concat': concat]
-    }
 
     def transform(String methodName, args) {
         println "Getting method: ${methodName}"
-        def method = methods[methodName]
-        if (method instanceof Closure) {
-            return method(args)
-        }
+        Transform transform = applicationContext.getBean(methodName)
+        return transform.transform(args)
     }
 
 }
