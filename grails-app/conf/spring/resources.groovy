@@ -1,3 +1,4 @@
+import demo.AddOneTransformer
 import demo.AddTransformer
 import demo.ConcatTransformer
 import demo.DataLoader
@@ -10,6 +11,8 @@ beans = {
     importBeans('classpath:/spring/resources.xml')
 
     add(AddTransformer)
+
+    addOne(AddOneTransformer)
 
     concat(ConcatTransformer)
 

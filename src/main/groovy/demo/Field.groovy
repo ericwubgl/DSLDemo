@@ -23,7 +23,8 @@ class Field {
 
     void transform(def arg) {
         println "Transforming, calling plugin ${arg}"
-        output = transformer.transform(arg, values)
+        output = transformer.transform(arg, output == null ? values : output)
+        println "Output: ${output}"
     }
 
 }
