@@ -8,9 +8,11 @@ class DataLoader {
 
     DataImport dataImport
 
+    GroovyShell groovyShell
+
     def load(def data) {
         Date before = new Date()
-        Script dslScript = new GroovyShell().parse(new File(BT_CONFIG))
+        Script dslScript = groovyShell.parse(new File(BT_CONFIG))
         Date between = new Date()
         long diff = between.getTime() - before.getTime()
         println TimeUnit.MILLISECONDS.convert(diff, TimeUnit.MILLISECONDS)

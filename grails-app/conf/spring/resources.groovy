@@ -16,9 +16,14 @@ beans = {
 
     concat(ConcatTransformer)
 
+    groovyShell(GroovyShell) { bean ->
+        bean.scope = 'prototype'
+    }
+
     dataLoader(DataLoader) { bean ->
         bean.scope = 'prototype'
         dataImport = ref('dataImport')
+        groovyShell = ref('groovyShell')
     }
 
     transformer(Transformer)
